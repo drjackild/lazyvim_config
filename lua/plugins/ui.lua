@@ -1,6 +1,6 @@
 return {
   { "ellisonleao/gruvbox.nvim" },
-  { "joshdick/onedark.vim" },
+  { "navarasu/onedark.nvim" },
   { "catppuccin/nvim", name = "catppuccin" },
 
   {
