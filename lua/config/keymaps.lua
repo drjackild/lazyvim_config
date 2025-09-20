@@ -2,5 +2,28 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Vimwiki bind to toggle TODO list items
-vim.keymap.set("n", "<A-x>", "<cmd>VimwikiToggleListItem<CR>", { desc = "(Vimwiki) Toggle list item" })
+local opts = function(desc)
+  return { noremap = true, silent = false, desc = desc }
+end
+
+-- * ZK keymaps * --
+
+-- Create a new note after asking for its title.
+vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts("New note"))
+
+-- Open notes.
+vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts("Open notes"))
+-- Open notes associated with the selected tags.
+vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts("Open notes assiciated with a tag"))
+
+-- Search for the notes matching a given query.
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>zf",
+  "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>",
+  opts("Query notes")
+)
+-- Search for the notes matching the current visual selection.
+vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts("Search notes with selection"))
+
+-- * End of ZK setup * --
