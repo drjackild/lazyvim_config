@@ -6,7 +6,9 @@ local opts = function(desc)
   return { noremap = true, silent = false, desc = desc }
 end
 
-local wk = require("which-key")
-wk.add({
-  { "<leader>o", group = "Obsidian" },
-})
+local ok, wk = pcall(require, "which-key")
+if ok then
+  wk.add({
+    { "<leader>o", group = "Org" },
+  })
+end
